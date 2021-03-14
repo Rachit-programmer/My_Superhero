@@ -21,6 +21,19 @@ function player_update(){
     });
 }
 
+function new_image(get_image){
+    fabric.Image.fromURL(get_image, function(Img){
+    block_image_object = Img;
+    block_image_object.scaleToWidth(block_image_width);
+    block_image_object.scaleToHeight(block_image_height);
+    block_image_object.set({
+    top:player_y,
+    left:player_x
+    });
+    canvas.add(block_image_object);
+    });
+}
+
 window.addEventListener("keydown", my_keydown);
 
 function my_keydown(e){
@@ -68,16 +81,60 @@ if(keyPressed == '66'){
     console.log("b");
 }
 if(keyPressed == '76'){
-    new_image('ironmen.png');
+    new_image('ironman_legs.png');
     console.log("l");
 }
 if(keyPressed == '82'){
-    new_image('thor_right_hand.jpg');
+    new_image('thor_right_hand.png');
     console.log("r");
 }
-if(keyPressed == '84'){
+if(keyPressed == '72'){
     new_image('captain_america_left_hand.png');
     console.log("h");
 }
 
+}
+
+function up(){
+
+    if (player_y >= 0) {
+        player_y = player_y - block_image_height;
+        console.log("block image height = " + block_image_height);
+        console.log("when Up Arrow key is pressed, X = " + player_x + ", Y = " + player_y);
+        canvas.remove(player_objects);
+        player_update();
+    }
+}
+
+function down(){
+
+    if (player_y <= 500) {
+        player_y = player_y + block_image_height;
+        console.log("block image height = " + block_image_height);
+        console.log("when Down Arrow key is pressed, X = " + player_x + ", Y = " + player_y);
+        canvas.remove(player_objects);
+        player_update();
+    }
+}
+
+function left(){
+
+    if (player_x > 0) {
+        player_x = player_x - block_image_width;
+        console.log("block image width = " + block_image_width);
+        console.log("when Left Arrow key is pressed, X = " + player_x + ", Y = " + player_y);
+        canvas.remove(player_objects);
+        player_update();
+    }
+}
+
+function right(){
+
+    if (player_x <= 850) {
+        player_x = player_x + block_image_width;
+        console.log("block image width = " + block_image_width);
+        console.log("when Left Arrow key is pressed, X = " + player_x + ", Y = " + player_y);
+        canvas.remove(player_objects);
+        player_update();
+    }
 }
